@@ -19,4 +19,4 @@ jobs:
         continue-on-error: ${{ matrix.experimental == 'true' }}
         env:
           EXPERIMENTAL: ${{ matrix.experimental }}
-        run: test "$EXPERIMENTAL" == false
+        run: false
