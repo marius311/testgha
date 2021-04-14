@@ -1,0 +1,22 @@
+name: runtests
+
+on: [push]
+
+jobs:
+  main:
+    runs-on: ${{ matrix.os }}
+    continue-on-error: ${{ matrix.experimental == 'true' }}
+    strategy:
+      matrix:
+        experimental: ['true', 'false']
+        os: [ubuntu-latest]
+      fail-fast: false
+    env:
+      PYTHON: python3
+
+    steps:
+      - uses: actions/checkout@v1.0.0
+      - name: test
+        env:
+          EXPERIMENTAL: ${{ matrix.experimental }}
+        run: test "$EXPERIMENTAL" == false
