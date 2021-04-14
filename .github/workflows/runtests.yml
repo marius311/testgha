@@ -5,7 +5,6 @@ on: [push]
 jobs:
   main:
     runs-on: ${{ matrix.os }}
-    continue-on-error: ${{ matrix.experimental == 'true' }}
     strategy:
       matrix:
         experimental: ['true', 'false']
@@ -17,6 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1.0.0
       - name: test
+        continue-on-error: ${{ matrix.experimental == 'true' }}
         env:
           EXPERIMENTAL: ${{ matrix.experimental }}
         run: test "$EXPERIMENTAL" == false
